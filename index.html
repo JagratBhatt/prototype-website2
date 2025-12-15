@@ -37,34 +37,55 @@
     }
 
     /* ===== LOGO STYLING ===== */
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+  /* ===== LOGO STYLING (RESPONSIVE) ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;   /* prevents line break */
+}
 
-    .logo img {
-      height: 45px;
-    }
+.logo img {
+  height: 42px;
+  flex-shrink: 0;
+}
 
-    .logo-text {
-      line-height: 1.1;
-    }
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
 
-    .logo-text .hindi {
-      font-size: 20px;
-      font-weight: bold;
-    }
+.logo-text .hindi {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .logo-text .english {
-      font-size: 12px;
-      opacity: 0.9;
-    }
+.logo-text .english {
+  font-size: 12px;
+  opacity: 0.9;
+}
 
-    nav a {
-      margin-left: 15px;
-      font-weight: 600;
-    }
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+  .logo img {
+    height: 34px;
+  }
+
+  .logo-text {
+    flex-direction: row;     /* Hindi + English in one line */
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .logo-text .hindi {
+    font-size: 16px;
+  }
+
+  .logo-text .english {
+    font-size: 11px;
+  }
+}
 
     /* ================= SLIDESHOW ================= */
     .slideshow {
@@ -325,3 +346,4 @@
 
 </body>
 </html>
+
