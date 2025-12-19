@@ -57,16 +57,25 @@
       border-radius: 4px;
     }
 
+    /* UPDATED LOGO TEXT STYLES */
+    .logo-text {
+      display: flex;
+      flex-direction: column; /* Stacks English under Hindi */
+      justify-content: center;
+    }
+
     .logo-text .hindi { 
       font-size: 18px; 
       font-weight: bold; 
-      line-height: 1;
+      line-height: 1.1;
+      white-space: nowrap; /* Forces Hindi onto a single line */
     }
 
     .logo-text .english { 
       font-size: 11px; 
       opacity: 0.9; 
       text-transform: uppercase;
+      margin-top: 2px; /* Adds small space between lines */
     }
 
     /* Navigation for Mobile (Hidden by default) */
@@ -348,5 +357,3 @@
 
 </body>
 </html>
-
-
