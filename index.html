@@ -26,7 +26,7 @@
       overflow-x: hidden;
     }
 
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; cursor: pointer; }
 
     /* ================= HEADER & MOBILE QUICK NAV ================= */
     header {
@@ -45,7 +45,7 @@
       padding: 8px 12px;
     }
 
-    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
     .logo img { height: 50px; width: auto; border-radius: 4px; }
     .logo-text { display: flex; flex-direction: column; }
     .logo-text .hindi { font-size: 18px; font-weight: bold; white-space: nowrap; line-height: 1.1; }
@@ -84,6 +84,60 @@
     nav.active { display: flex; }
     nav a { padding: 15px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
+    /* ================= NAVIGATION LOGIC ================= */
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+
+    /* ================= ABOUT / ACHIEVEMENTS PAGE ================= */
+    #about-view {
+      position: relative;
+      min-height: 80vh;
+      padding: 40px 20px;
+      background-color: white;
+    }
+
+    /* Watermark Background */
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      background-image: url('https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.08; /* Low opacity for readability */
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-content h2 {
+      color: var(--saffron);
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .achievement-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      margin-bottom: 15px;
+      border-left: 5px solid var(--saffron);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .achievement-card h3 { color: var(--dark); margin-bottom: 5px; }
+
     /* ================= FLOATING SOCIALS & WHATSAPP ================= */
     .side-social-bar {
       position: fixed;
@@ -96,15 +150,9 @@
     }
 
     .side-social-icon {
-      width: 45px;
-      height: 45px;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 2px;
-      border-radius: 5px 0 0 5px;
+      width: 45px; height: 45px; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 2px; border-radius: 5px 0 0 5px;
     }
 
     .insta { background: #E1306C; }
@@ -113,21 +161,13 @@
 
     .whatsapp-float {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
+      bottom: 20px; left: 20px;
       background-color: var(--whatsapp);
-      color: #FFF;
-      border-radius: 50px;
-      text-align: center;
-      font-size: 30px;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      z-index: 1001;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse 2s infinite;
+      color: #FFF; border-radius: 50px;
+      width: 60px; height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      z-index: 1001; animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
@@ -138,55 +178,18 @@
 
     /* ================= SLIDESHOW ================= */
     .slideshow-container {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      overflow: hidden;
-      background: #eee;
-      touch-action: pan-y;
+      position: relative; width: 100%; height: 60vh;
+      overflow: hidden; background: #eee; touch-action: pan-y;
     }
 
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-
+    .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
     .slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     .slide.active { opacity: 1; }
+    .slide-text { position: absolute; bottom: 12%; left: 5%; color: #000; width: 85%; z-index: 5; }
+    .slide-text h1 { font-size: 26px; font-weight: 900; }
 
-    .slide-text {
-      position: absolute;
-      bottom: 12%; 
-      left: 5%;
-      color: #000;
-      width: 85%;
-      text-align: left;
-      z-index: 5;
-    }
-
-    .slide-text h1 { font-size: 26px; font-weight: 900; margin-bottom: 5px; }
-    .slide-text p { font-size: 15px; font-weight: 700; }
-
-    .dot-container {
-      position: absolute;
-      bottom: 15px;
-      width: 100%;
-      text-align: center;
-      z-index: 10;
-    }
-
-    .dot {
-      height: 8px;
-      width: 8px;
-      margin: 0 4px;
-      background-color: rgba(0,0,0,0.3);
-      border-radius: 50%;
-      display: inline-block;
-    }
-
+    .dot-container { position: absolute; bottom: 15px; width: 100%; text-align: center; z-index: 10; }
+    .dot { height: 8px; width: 8px; margin: 0 4px; background-color: rgba(0,0,0,0.3); border-radius: 50%; display: inline-block; }
     .dot.active { background-color: var(--saffron); width: 20px; border-radius: 10px; }
 
     /* ================= LEADERSHIP & FORM ================= */
@@ -198,8 +201,8 @@
     
     .join-container { padding: 30px 15px; background: var(--gray); padding-bottom: 100px; }
     form { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; border-radius: 4px; }
+    input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
 
     @media (min-width: 900px) {
       .mobile-quick-nav { display: none; }
@@ -226,7 +229,7 @@
 
 <header>
   <div class="topbar">
-    <div class="logo">
+    <div class="logo" onclick="navigateTo('home-view')">
       <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg" alt="Logo">
       <div class="logo-text">
         <div class="hindi">भारत रक्षा पार्टी</div>
@@ -235,85 +238,98 @@
     </div>
     <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     <nav id="mainNav">
-      <a href="#leaders" onclick="toggleMenu()">Leadership</a>
-      <a href="#donate" onclick="toggleMenu()">Donate 🙏</a>
+      <a onclick="navigateTo('home-view'); toggleMenu();">Home</a>
+      <a href="#leaders" onclick="navigateTo('home-view'); toggleMenu();">Leadership</a>
+      <a href="#join" onclick="navigateTo('home-view'); toggleMenu();">Join Us</a>
     </nav>
   </div>
   <div class="mobile-quick-nav">
-    <a href="#about" class="quick-link">About</a>
-    <a href="#join" class="quick-link" style="border-right:none;">Join Us</a>
+    <a onclick="navigateTo('about-view')" class="quick-link">About</a>
+    <a href="#join" onclick="navigateTo('home-view')" class="quick-link" style="border-right:none;">Join Us</a>
   </div>
 </header>
 
-<div class="slideshow-container" id="slideshow">
-  <div class="slide active">
-    <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg">
-    <div class="slide-text">
-      <h1> </h1>
-      <p> </p>
+<div id="home-view" class="page-view active">
+  <div class="slideshow-container" id="slideshow">
+    <div class="slide active">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg">
+      <div class="slide-text"><h1> </h1><p> </p></div>
     </div>
-  </div>
-  <div class="slide">
-    <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/swamiVivekananda.jpg">
-    <div class="slide-text">
-      <h1>Swami Vivekananda</h1>
-      <p>"Arise, awake, and stop not until the goal is reached."</p>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/swamiVivekananda.jpg">
+      <div class="slide-text"><h1>Swami Vivekananda</h1><p>"Arise, awake, and stop not until the goal is reached."</p></div>
     </div>
-  </div>
-  <div class="slide">
-    <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/BharatMata.webp">
-    <div class="slide-text">
-      <h1>Bharat Mata</h1>
-      <p>Protection and Prosperity for the Motherland.</p>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/BharatMata.webp">
+      <div class="slide-text"><h1>Bharat Mata</h1><p>Protection and Prosperity for the Motherland.</p></div>
     </div>
+    <div class="dot-container"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
   </div>
 
-  <div class="dot-container">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+  <section id="leaders">
+    <h2 class="section-title">National Leadership</h2>
+    <div class="leader-row">
+      <div class="leader-image"><img src="https://via.placeholder.com/600x400?text=Leader+1" alt="Leader 1"></div>
+      <div class="leader-info">
+        <h3>Shri Mahendra Puri Goswami</h3>
+        <p>National President. A visionary dedicated to the spiritual and political awakening of the nation.</p>
+      </div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-image"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG" alt="Leader 2"></div>
+      <div class="leader-info">
+        <h3>Shri Arun Agarwal</h3>
+        <p>National Spokesperson of Bhaarat Raksha Party</p>
+      </div>
+    </div>
+    <div class="leader-row">
+      <div class="leader-image"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/MahantJi.jpg" alt="Leader 3"></div>
+      <div class="leader-info">
+        <h3>Mahant Abhimanyu Giri </h3>
+        <p>National General Secretary</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="join-container">
+    <h2 class="section-title">Join the Movement</h2>
+    <form onsubmit="event.preventDefault(); alert('Jai Hind! Registration Received.'); this.reset();">
+      <input type="text" placeholder="Full Name" required />
+      <input type="text" placeholder="City" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <button type="submit">REGISTER NOW</button>
+    </form>
+  </section>
 </div>
 
-<section id="leaders">
-  <h2 class="section-title">National Leadership</h2>
-  <div class="leader-row">
-    <div class="leader-image"><img src="https://via.placeholder.com/600x400?text=Leader+1" alt="Leader 1"></div>
-    <div class="leader-info">
-      <h3>Shri Mahendra Puri Goswami</h3>
-      <p>National President. A visionary dedicated to the spiritual and political awakening of the nation.</p>
+<div id="about-view" class="page-view">
+  <div class="watermark-bg"></div>
+  <div class="about-content">
+    <h2>Our Achievements</h2>
+    
+    <div class="achievement-card">
+      <h3>National Awareness Campaigns</h3>
+      <p>Successfully organized over 500 rallies across Bharat to promote national security and unity.</p>
     </div>
-  </div>
-  <div class="leader-row">
-    <div class="leader-image">
-      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG" alt="Leader 2">
-    </div>
-    <div class="leader-info">
-      <h3>Shri Arun Agarwal</h3>
-      <p>National Spokesperson of Bhaarat Raksha Party</p>
-    </div>
-  </div>
 
-  <div class="leader-row">
-    <div class="leader-image">
-      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/MahantJi.jpg" alt="Leader 3">
+    <div class="achievement-card">
+      <h3>Youth Empowerment</h3>
+      <p>Established 200+ local chapters led by energetic youth leaders to drive social change at the grassroots level.</p>
     </div>
-    <div class="leader-info">
-      <h3>Mahant Abhimanyu Giri </h3>
-      <p>National General Secretary</p>
-    </div>
-  </div>
-</section>
 
-<section id="join" class="join-container">
-  <h2 class="section-title">Join the Movement</h2>
-  <form onsubmit="event.preventDefault(); alert('Jai Hind! Registration Received.'); this.reset();">
-    <input type="text" placeholder="Full Name" required />
-    <input type="text" placeholder="City" required />
-    <input type="tel" placeholder="Phone Number" required />
-    <button type="submit">REGISTER NOW</button>
-  </form>
-</section>
+    <div class="achievement-card">
+      <h3>Cultural Preservation</h3>
+      <p>Continuous efforts in reviving and protecting the ancient heritage and spiritual values of our motherland.</p>
+    </div>
+
+    <div class="achievement-card">
+      <h3>Community Support</h3>
+      <p>Provided active assistance and food drives during national emergencies and local crises.</p>
+    </div>
+
+    <button onclick="navigateTo('home-view')" style="margin-top:20px; width: auto; padding: 12px 30px;">Back to Home</button>
+  </div>
+</div>
 
 <footer style="background:var(--dark); color:white; text-align:center; padding:30px 20px;">
   <p>© 2025 Bharat Raksha Party | Official Site</p>
@@ -322,13 +338,20 @@
 <script>
   function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
 
+  // Navigation Logic
+  function navigateTo(viewId) {
+    document.querySelectorAll('.page-view').forEach(view => {
+      view.classList.remove('active');
+    });
+    document.getElementById(viewId).classList.add('active');
+    window.scrollTo(0, 0); // Scroll to top on page change
+  }
+
+  // Slideshow Logic
   let slideIndex = 0;
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.dot');
   const slideshow = document.getElementById('slideshow');
-
-  let touchstartX = 0;
-  let touchendX = 0;
 
   function showSlides(n) {
     if (n >= slides.length) slideIndex = 0;
@@ -342,16 +365,23 @@
     dots[slideIndex].classList.add('active');
   }
 
+  // Touch support for slideshow
+  let touchstartX = 0;
+  let touchendX = 0;
   slideshow.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
-  slideshow.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; 
+  slideshow.addEventListener('touchend', e => { 
+    touchendX = e.changedTouches[0].screenX; 
     if (touchendX < touchstartX - 50) showSlides(slideIndex + 1);
     if (touchendX > touchstartX + 50) showSlides(slideIndex - 1);
   });
 
-  setInterval(() => { showSlides(slideIndex + 1); }, 5000);
+  setInterval(() => { 
+    // Only auto-slide if home view is active
+    if(document.getElementById('home-view').classList.contains('active')) {
+      showSlides(slideIndex + 1); 
+    }
+  }, 5000);
 </script>
 
 </body>
 </html>
-
-
