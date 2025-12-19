@@ -92,11 +92,22 @@
     #about-view {
       position: relative;
       min-height: 80vh;
-      padding: 40px 20px;
+      padding: 20px;
       background-color: white;
     }
 
-    /* Watermark Background */
+    .back-btn-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--saffron);
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 16px;
+      z-index: 2;
+      position: relative;
+    }
+
     .watermark-bg {
       position: absolute;
       top: 50%;
@@ -108,7 +119,7 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
-      opacity: 0.08; /* Low opacity for readability */
+      opacity: 0.08;
       z-index: 0;
       pointer-events: none;
     }
@@ -135,8 +146,6 @@
       border-left: 5px solid var(--saffron);
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-
-    .achievement-card h3 { color: var(--dark); margin-bottom: 5px; }
 
     /* ================= FLOATING SOCIALS & WHATSAPP ================= */
     .side-social-bar {
@@ -244,7 +253,7 @@
     </nav>
   </div>
   <div class="mobile-quick-nav">
-    <a onclick="navigateTo('about-view')" class="quick-link">About</a>
+    <a onclick="handleAboutClick()" class="quick-link">About</a>
     <a href="#join" onclick="navigateTo('home-view')" class="quick-link" style="border-right:none;">Join Us</a>
   </div>
 </header>
@@ -305,6 +314,7 @@
 <div id="about-view" class="page-view">
   <div class="watermark-bg"></div>
   <div class="about-content">
+    <a onclick="history.back()" class="back-btn-top"><i class="fas fa-arrow-left"></i> Back to Home</a>
     <h2>Our Achievements</h2>
     
     <div class="achievement-card">
@@ -326,8 +336,6 @@
       <h3>Community Support</h3>
       <p>Provided active assistance and food drives during national emergencies and local crises.</p>
     </div>
-
-    <button onclick="navigateTo('home-view')" style="margin-top:20px; width: auto; padding: 12px 30px;">Back to Home</button>
   </div>
 </div>
 
@@ -338,13 +346,23 @@
 <script>
   function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
 
-  // Navigation Logic
+  // Logic to handle mobile "Back" button
+  function handleAboutClick() {
+    history.pushState({page: 'about'}, "About", "#about");
+    navigateTo('about-view');
+  }
+
+  window.onpopstate = function(event) {
+    // If the user goes back, we show the home view
+    navigateTo('home-view');
+  };
+
   function navigateTo(viewId) {
     document.querySelectorAll('.page-view').forEach(view => {
       view.classList.remove('active');
     });
     document.getElementById(viewId).classList.add('active');
-    window.scrollTo(0, 0); // Scroll to top on page change
+    window.scrollTo(0, 0);
   }
 
   // Slideshow Logic
@@ -365,7 +383,6 @@
     dots[slideIndex].classList.add('active');
   }
 
-  // Touch support for slideshow
   let touchstartX = 0;
   let touchendX = 0;
   slideshow.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
@@ -376,7 +393,6 @@
   });
 
   setInterval(() => { 
-    // Only auto-slide if home view is active
     if(document.getElementById('home-view').classList.contains('active')) {
       showSlides(slideIndex + 1); 
     }
