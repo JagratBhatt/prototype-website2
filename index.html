@@ -13,6 +13,7 @@
       --dark: #1a1a1a;
       --light: #ffffff;
       --gray: #f4f4f4;
+      --whatsapp: #25d366;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,11 +23,12 @@
       color: var(--dark);
       scroll-behavior: smooth;
       background-color: var(--light);
+      overflow-x: hidden;
     }
 
     a { text-decoration: none; color: inherit; }
 
-    /* ================= HEADER & NAVIGATION ================= */
+    /* ================= HEADER & MOBILE QUICK NAV ================= */
     header {
       background: var(--saffron);
       color: var(--light);
@@ -43,14 +45,8 @@
       padding: 8px 12px;
     }
 
-    .logo { 
-      display: flex; 
-      align-items: center; 
-      gap: 10px; 
-    }
-
+    .logo { display: flex; align-items: center; gap: 10px; }
     .logo img { height: 50px; width: auto; border-radius: 4px; }
-
     .logo-text { display: flex; flex-direction: column; }
     .logo-text .hindi { font-size: 18px; font-weight: bold; white-space: nowrap; line-height: 1.1; }
     .logo-text .english { font-size: 10px; opacity: 0.9; text-transform: uppercase; }
@@ -72,13 +68,7 @@
       border-right: 1px solid #eee;
     }
 
-    .menu-toggle {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-    }
+    .menu-toggle { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
 
     nav { 
       display: none; 
@@ -91,41 +81,69 @@
       text-align: center;
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
-
     nav.active { display: flex; }
     nav a { padding: 15px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-    /* ================= VERTICAL SOCIAL BAR ================= */
+    /* ================= FLOATING SOCIALS & WHATSAPP ================= */
     .side-social-bar {
       position: fixed;
-      right: 10px;
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      z-index: 999;
+      z-index: 1001;
     }
 
     .side-social-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(0,0,0,0.7);
+      width: 45px;
+      height: 45px;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      font-size: 18px;
+      font-size: 20px;
+      margin-bottom: 2px;
+      border-radius: 5px 0 0 5px;
     }
 
-    /* ================= SLIDESHOW (Text Bottom-Left & Nav) ================= */
-    .slideshow {
+    .insta { background: #E1306C; }
+    .fb { background: #1877F2; }
+    .twit { background: #000000; }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: var(--whatsapp);
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      z-index: 1001;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* ================= SLIDESHOW ================= */
+    .slideshow-container {
       position: relative;
       width: 100%;
       height: 60vh;
       overflow: hidden;
       background: #eee;
+      touch-action: pan-y;
     }
 
     .slide {
@@ -133,58 +151,53 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.8s ease-in-out;
     }
 
-    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     .slide.active { opacity: 1; }
 
-    /* Text positioned Down Left */
     .slide-text {
       position: absolute;
-      bottom: 10%; /* Move to bottom */
-      left: 5%;   /* Move to left */
+      bottom: 12%; 
+      left: 5%;
       color: #000;
-      width: 80%;
-      text-align: left; /* Align text left */
+      width: 85%;
+      text-align: left;
       z-index: 5;
     }
 
-    .slide-text h1 { font-size: 28px; font-weight: 900; margin-bottom: 5px; }
-    .slide-text p { font-size: 16px; font-weight: 700; }
+    .slide-text h1 { font-size: 26px; font-weight: 900; margin-bottom: 5px; }
+    .slide-text p { font-size: 15px; font-weight: 700; }
 
-    /* Arrows */
-    .prev, .next {
-      cursor: pointer;
+    .dot-container {
       position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      background-color: rgba(0,0,0,0.3);
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
       z-index: 10;
     }
 
-    .next { right: 0; border-radius: 3px 0 0 3px; }
-    .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+    .dot {
+      height: 8px;
+      width: 8px;
+      margin: 0 4px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      display: inline-block;
+    }
 
-    /* ================= LEADERSHIP ================= */
+    .dot.active { background-color: var(--saffron); width: 20px; border-radius: 10px; }
+
+    /* ================= LEADERSHIP & FORM ================= */
     .section-title { text-align: center; font-size: 24px; color: var(--saffron); padding: 30px 10px; font-weight: bold; }
     .leader-row { display: flex; flex-direction: column; border-bottom: 4px solid var(--gray); }
-    .leader-image { width: 100%; height: 300px; }
+    .leader-image { width: 100%; height: 350px; }
     .leader-image img { width: 100%; height: 100%; object-fit: cover; }
-    .leader-info { padding: 20px; text-align: center; background: white; }
-    .leader-info h3 { color: var(--saffron); margin-bottom: 5px; }
-
-    /* ================= JOIN FORM ================= */
-    .join-container { padding: 30px 15px; background: var(--gray); }
-    form { background: white; padding: 20px; border-radius: 8px; }
+    .leader-info { padding: 25px 20px; text-align: center; background: white; }
+    
+    .join-container { padding: 30px 15px; background: var(--gray); padding-bottom: 100px; }
+    form { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
     button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; border-radius: 4px; }
 
@@ -195,19 +208,20 @@
       .leader-row { flex-direction: row; height: 50vh; }
       .leader-row:nth-child(even) { flex-direction: row-reverse; }
       .leader-image { flex: 1; }
-      .leader-info { flex: 1; text-align: left; padding: 50px; }
-      .slide-text h1 { font-size: 40px; }
-      .slide-text p { font-size: 22px; }
+      .leader-info { flex: 1; text-align: left; padding: 60px; }
     }
   </style>
 </head>
 <body>
 
+<a href="https://wa.me/8630240413" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
 <div class="side-social-bar">
-  <a href="https://www.instagram.com/jagrit_jyotish2/" target="_blank" class="side-social-icon"><i class="fab fa-instagram"></i></a>
-  <a href="#" class="side-social-icon"><i class="fab fa-facebook-f"></i></a>
-  <a href="#" class="side-social-icon"><i class="fab fa-x-twitter"></i></a>
-  <a href="#" class="side-social-icon"><i class="fas fa-globe"></i></a>
+  <a href="https://www.instagram.com/jagrit_jyotish2/" target="_blank" class="side-social-icon insta"><i class="fab fa-instagram"></i></a>
+  <a href="#" class="side-social-icon fb"><i class="fab fa-facebook-f"></i></a>
+  <a href="#" class="side-social-icon twit"><i class="fab fa-x-twitter"></i></a>
 </div>
 
 <header>
@@ -231,12 +245,12 @@
   </div>
 </header>
 
-<div class="slideshow">
+<div class="slideshow-container" id="slideshow">
   <div class="slide active">
     <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg">
     <div class="slide-text">
-      <h1> </h1>
-      <p> </p>
+      <h1>सन्देश</h1>
+      <p>"सुरक्षित भारत = संपन्न भारत - सुखी भारत"</p>
     </div>
   </div>
   <div class="slide">
@@ -254,8 +268,11 @@
     </div>
   </div>
 
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  <div class="dot-container">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
 </div>
 
 <section id="leaders">
@@ -264,56 +281,55 @@
     <div class="leader-image"><img src="https://via.placeholder.com/600x400?text=Leader+1" alt="Leader 1"></div>
     <div class="leader-info">
       <h3>Shri Mahendra Puri Goswami</h3>
-      <p>National President. Leading the nation toward spiritual and political awakening.</p>
-    </div>
-  </div>
-  <div class="leader-row">
-    <div class="leader-image"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG" alt="Leader 2"></div>
-    <div class="leader-info">
-      <h3>Shri Arun Agarwal</h3>
-      <p>National Spokesperson of Bhaarat Raksha Party.</p>
+      <p>National President. A visionary dedicated to the spiritual and political awakening of the nation.</p>
     </div>
   </div>
 </section>
 
 <section id="join" class="join-container">
   <h2 class="section-title">Join the Movement</h2>
-  <form onsubmit="event.preventDefault(); alert('Jai Hind! Received.');">
+  <form onsubmit="event.preventDefault(); alert('Jai Hind! Registration Received.'); this.reset();">
     <input type="text" placeholder="Full Name" required />
     <input type="tel" placeholder="Phone Number" required />
-    <input type="email" placeholder="Email Address" required />
     <button type="submit">REGISTER NOW</button>
   </form>
 </section>
 
-<footer style="background:var(--dark); color:white; text-align:center; padding:20px;">
-  <p>© 2025 Bharat Raksha Party</p>
+<footer style="background:var(--dark); color:white; text-align:center; padding:30px 20px;">
+  <p>© 2025 Bharat Raksha Party | Official Site</p>
 </footer>
 
 <script>
   function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
 
   let slideIndex = 0;
-  let slides = document.getElementsByClassName("slide");
-  let slideTimer = setInterval(() => { plusSlides(1); }, 5000);
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const slideshow = document.getElementById('slideshow');
 
-  function plusSlides(n) {
-    clearInterval(slideTimer); // Reset timer when clicked
-    showSlides(slideIndex += n);
-    slideTimer = setInterval(() => { plusSlides(1); }, 5000);
-  }
+  let touchstartX = 0;
+  let touchendX = 0;
 
   function showSlides(n) {
-    if (n >= slides.length) {slideIndex = 0}
-    if (n < 0) {slideIndex = slides.length - 1}
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].classList.remove("active");
-    }
-    slides[slideIndex].classList.add("active");
+    if (n >= slides.length) slideIndex = 0;
+    else if (n < 0) slideIndex = slides.length - 1;
+    else slideIndex = n;
+    
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    slides[slideIndex].classList.add('active');
+    dots[slideIndex].classList.add('active');
   }
+
+  slideshow.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
+  slideshow.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; 
+    if (touchendX < touchstartX - 50) showSlides(slideIndex + 1);
+    if (touchendX > touchstartX + 50) showSlides(slideIndex - 1);
+  });
+
+  setInterval(() => { showSlides(slideIndex + 1); }, 5000);
 </script>
 
 </body>
 </html>
-
-
