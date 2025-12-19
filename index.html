@@ -26,7 +26,7 @@
 
     a { text-decoration: none; color: inherit; }
 
-    /* ================= MOBILE-FIRST HEADER ================= */
+    /* ================= HEADER & NAVIGATION ================= */
     header {
       background: var(--saffron);
       color: var(--light);
@@ -40,83 +40,90 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 15px;
-      height: 70px;
+      padding: 8px 12px;
     }
 
     .logo { 
       display: flex; 
       align-items: center; 
       gap: 10px; 
-      flex: 1;
     }
 
-    .logo img { 
-      height: 50px; 
-      width: auto; 
-      border-radius: 4px;
-    }
+    .logo img { height: 50px; width: auto; border-radius: 4px; }
 
-    /* UPDATED LOGO TEXT STYLES */
-    .logo-text {
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text .hindi { font-size: 18px; font-weight: bold; white-space: nowrap; line-height: 1.1; }
+    .logo-text .english { font-size: 10px; opacity: 0.9; text-transform: uppercase; }
+
+    .mobile-quick-nav {
       display: flex;
-      flex-direction: column; /* Stacks English under Hindi */
-      justify-content: center;
+      background: white;
+      border-bottom: 1px solid #ddd;
     }
 
-    .logo-text .hindi { 
-      font-size: 18px; 
-      font-weight: bold; 
-      line-height: 1.1;
-      white-space: nowrap; /* Forces Hindi onto a single line */
-    }
-
-    .logo-text .english { 
-      font-size: 11px; 
-      opacity: 0.9; 
+    .quick-link {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      color: var(--saffron);
+      font-size: 14px;
       text-transform: uppercase;
-      margin-top: 2px; /* Adds small space between lines */
+      border-right: 1px solid #eee;
     }
 
-    /* Navigation for Mobile (Hidden by default) */
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
     nav { 
       display: none; 
       position: absolute;
-      top: 70px;
+      top: 100%;
       left: 0;
       width: 100%;
       background: var(--saffron);
       flex-direction: column;
       text-align: center;
-      padding: 20px 0;
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
 
     nav.active { display: flex; }
+    nav a { padding: 15px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-    nav a { 
-      padding: 15px; 
-      font-weight: bold; 
-      font-size: 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* ================= VERTICAL SOCIAL BAR ================= */
+    .side-social-bar {
+      position: fixed;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
     }
 
-    /* Hamburger Menu Button */
-    .menu-toggle {
-      display: block;
-      background: none;
-      border: none;
+    .side-social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0,0,0,0.7);
       color: white;
-      font-size: 28px;
-      cursor: pointer;
-      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 18px;
     }
 
-    /* ================= SLIDESHOW (Transparent & Black Text) ================= */
+    /* ================= SLIDESHOW (Text Bottom-Left & Nav) ================= */
     .slideshow {
       position: relative;
       width: 100%;
-      height: 60vh; /* Shorter for mobile viewing */
+      height: 60vh;
       overflow: hidden;
       background: #eee;
     }
@@ -132,79 +139,76 @@
     .slide img { width: 100%; height: 100%; object-fit: cover; }
     .slide.active { opacity: 1; }
 
+    /* Text positioned Down Left */
     .slide-text {
       position: absolute;
+      bottom: 10%; /* Move to bottom */
+      left: 5%;   /* Move to left */
+      color: #000;
+      width: 80%;
+      text-align: left; /* Align text left */
+      z-index: 5;
+    }
+
+    .slide-text h1 { font-size: 28px; font-weight: 900; margin-bottom: 5px; }
+    .slide-text p { font-size: 16px; font-weight: 700; }
+
+    /* Arrows */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #000000;
-      background: transparent;
-      width: 90%;
-      text-align: center;
-    }
-
-    .slide-text h1 { font-size: 32px; font-weight: 900; margin-bottom: 10px; }
-    .slide-text p { font-size: 18px; font-weight: 700; line-height: 1.3; }
-
-    .dots { position: absolute; bottom: 15px; width: 100%; text-align: center; }
-    .dot { height: 10px; width: 10px; margin: 0 5px; background: rgba(0,0,0,0.3); border-radius: 50%; display: inline-block; }
-    .dot.active { background: var(--saffron); }
-
-    /* ================= LEADERSHIP SECTION (Mobile Stack) ================= */
-    .section-title { 
-      text-align: center; 
-      font-size: 28px; 
-      color: var(--saffron); 
-      padding: 30px 0 10px; 
-      text-transform: uppercase;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
       font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.3);
+      z-index: 10;
     }
 
-    .leader-row {
-      display: flex;
-      flex-direction: column; /* Stacks image on top of text for mobile */
-      border-bottom: 5px solid var(--gray);
-    }
+    .next { right: 0; border-radius: 3px 0 0 3px; }
+    .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
 
-    .leader-image { width: 100%; height: 350px; }
+    /* ================= LEADERSHIP ================= */
+    .section-title { text-align: center; font-size: 24px; color: var(--saffron); padding: 30px 10px; font-weight: bold; }
+    .leader-row { display: flex; flex-direction: column; border-bottom: 4px solid var(--gray); }
+    .leader-image { width: 100%; height: 300px; }
     .leader-image img { width: 100%; height: 100%; object-fit: cover; }
-
-    .leader-info {
-      padding: 25px 20px;
-      text-align: center;
-      background: white;
-    }
-
-    .leader-info h3 { color: var(--saffron); font-size: 24px; margin-bottom: 10px; }
-    .leader-info p { font-size: 15px; line-height: 1.5; color: #444; }
+    .leader-info { padding: 20px; text-align: center; background: white; }
+    .leader-info h3 { color: var(--saffron); margin-bottom: 5px; }
 
     /* ================= JOIN FORM ================= */
-    .join-container { padding: 40px 20px; background: var(--gray); }
-    form { width: 100%; background: white; padding: 25px; border-radius: 8px; }
-    input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; font-size: 18px; margin-top: 10px; border-radius: 4px; }
+    .join-container { padding: 30px 15px; background: var(--gray); }
+    form { background: white; padding: 20px; border-radius: 8px; }
+    input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; border-radius: 4px; }
 
-    /* ================= FOOTER ================= */
-    footer { background: var(--dark); color: white; text-align: center; padding: 30px 20px; }
-    .social-bar { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-    .social-icon { width: 45px; height: 45px; background: #333; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 20px; }
-
-    /* DESKTOP ADJUSTMENTS */
     @media (min-width: 900px) {
-      .topbar { padding: 10px 10%; }
-      .menu-toggle { display: none; }
-      nav { display: flex; position: static; width: auto; background: none; box-shadow: none; flex-direction: row; padding: 0; }
-      nav a { border: none; font-size: 16px; }
+      .mobile-quick-nav { display: none; }
+      nav { display: flex; position: static; flex-direction: row; box-shadow: none; width: auto; }
+      nav a { border: none; }
       .leader-row { flex-direction: row; height: 50vh; }
       .leader-row:nth-child(even) { flex-direction: row-reverse; }
-      .leader-image { flex: 1; height: 100%; }
-      .leader-info { flex: 1; text-align: left; padding: 60px; }
-      .slideshow { height: 75vh; }
-      .slide-text { transform: none; top: auto; left: 8%; bottom: 20%; text-align: left; }
+      .leader-image { flex: 1; }
+      .leader-info { flex: 1; text-align: left; padding: 50px; }
+      .slide-text h1 { font-size: 40px; }
+      .slide-text p { font-size: 22px; }
     }
   </style>
 </head>
 <body>
+
+<div class="side-social-bar">
+  <a href="https://www.instagram.com/jagrit_jyotish2/" target="_blank" class="side-social-icon"><i class="fab fa-instagram"></i></a>
+  <a href="#" class="side-social-icon"><i class="fab fa-facebook-f"></i></a>
+  <a href="#" class="side-social-icon"><i class="fab fa-x-twitter"></i></a>
+  <a href="#" class="side-social-icon"><i class="fas fa-globe"></i></a>
+</div>
 
 <header>
   <div class="topbar">
@@ -215,17 +219,15 @@
         <div class="english">Bharat Raksha Party</div>
       </div>
     </div>
-    
-    <button class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
-
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     <nav id="mainNav">
-      <a href="#about" onclick="toggleMenu()">About</a>
       <a href="#leaders" onclick="toggleMenu()">Leadership</a>
       <a href="#donate" onclick="toggleMenu()">Donate 🙏</a>
-      <a href="#join" onclick="toggleMenu()">Join Us</a>
     </nav>
+  </div>
+  <div class="mobile-quick-nav">
+    <a href="#about" class="quick-link">About</a>
+    <a href="#join" class="quick-link" style="border-right:none;">Join Us</a>
   </div>
 </header>
 
@@ -233,8 +235,8 @@
   <div class="slide active">
     <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg">
     <div class="slide-text">
-    <h1>Bharat Raksha Party- सन्देश </h1>
-      <p>"सुरक्षित भारत = संपन्न भारत - सुखी भारत "</p>
+      <h1>सन्देश</h1>
+      <p>"सुरक्षित भारत = संपन्न भारत - सुखी भारत"</p>
     </div>
   </div>
   <div class="slide">
@@ -251,107 +253,63 @@
       <p>Protection and Prosperity for the Motherland.</p>
     </div>
   </div>
-  <div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-  </div>
+
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 
 <section id="leaders">
   <h2 class="section-title">National Leadership</h2>
-
   <div class="leader-row">
-    <div class="leader-image">
-          <img src="https://via.placeholder.com/600x400?text=Leader+1+Photo" alt="Leader 1">
-    </div>
+    <div class="leader-image"><img src="https://via.placeholder.com/600x400?text=Leader+1" alt="Leader 1"></div>
     <div class="leader-info">
       <h3>Shri Mahendra Puri Goswami</h3>
-      <p>National President. A visionary dedicated to the spiritual and political awakening of the nation. Leading the party with integrity and deep-rooted values.</p>
+      <p>National President. Leading the nation toward spiritual and political awakening.</p>
     </div>
   </div>
-
   <div class="leader-row">
-    <div class="leader-image">
-      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG" alt="Leader 2">
-    </div>
+    <div class="leader-image"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG" alt="Leader 2"></div>
     <div class="leader-info">
       <h3>Shri Arun Agarwal</h3>
-      <p>National Spokesperson of Bhaarat Raksha Party</p>
-    </div>
-  </div>
-
-  <div class="leader-row">
-    <div class="leader-image">
-      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/MahantJi.jpg" alt="Leader 3">
-    </div>
-    <div class="leader-info">
-      <h3>Mahant Abhimanyu Giri </h3>
-      <p>National General Secretary</p>
-    </div>
-  </div>
-
-  <div class="leader-row">
-    <div class="leader-image">
-      <img src="https://via.placeholder.com/600x400?text=Leader+4+Photo" alt="Leader 4">
-    </div>
-    <div class="leader-info">
-      <h3>Leader Name 4</h3>
-      <p>Treasurer. Ensuring transparency and ethical management of the party's resources to serve the people effectively.</p>
+      <p>National Spokesperson of Bhaarat Raksha Party.</p>
     </div>
   </div>
 </section>
 
 <section id="join" class="join-container">
-  <h2 class="section-title" style="color:var(--dark)">Join the Movement</h2>
-  <form id="joinForm" onsubmit="handleFormSubmit(event)">
-    <input type="text" id="fullName" placeholder="Full Name" required />
-    <input type="tel" id="phone" placeholder="Phone Number (10 digits)" pattern="[0-9]{10}" required />
-    <input type="email" id="email" placeholder="Email Address" required />
-    <textarea id="message" rows="4" placeholder="Why do you wish to join Bharat Raksha Party?"></textarea>
+  <h2 class="section-title">Join the Movement</h2>
+  <form onsubmit="event.preventDefault(); alert('Jai Hind! Received.');">
+    <input type="text" placeholder="Full Name" required />
+    <input type="tel" placeholder="Phone Number" required />
+    <input type="email" placeholder="Email Address" required />
     <button type="submit">REGISTER NOW</button>
-    <div id="formMessage" style="display:none; color:green; text-align:center; font-weight:bold; margin-top:15px;">Jai Hind! Your application has been received.</div>
   </form>
 </section>
 
-<footer>
-  <div class="social-bar">
-    <a href="https://www.instagram.com/jagrit_jyotish2/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
-    <a href="#" class="social-icon"><i class="fas fa-globe"></i></a>
-  </div>
+<footer style="background:var(--dark); color:white; text-align:center; padding:20px;">
   <p>© 2025 Bharat Raksha Party</p>
-  <p style="font-size: 12px; margin-top: 10px; opacity: 0.7;">Official Website | Jai Hind</p>
 </footer>
 
 <script>
-  // HAMBURGER MENU LOGIC
-  function toggleMenu() {
-    const nav = document.getElementById('mainNav');
-    nav.classList.toggle('active');
+  function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
+
+  let slideIndex = 0;
+  let slides = document.getElementsByClassName("slide");
+  let slideTimer = setInterval(() => { plusSlides(1); }, 5000);
+
+  function plusSlides(n) {
+    clearInterval(slideTimer); // Reset timer when clicked
+    showSlides(slideIndex += n);
+    slideTimer = setInterval(() => { plusSlides(1); }, 5000);
   }
 
-  // SLIDESHOW LOGIC
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-
-  function showSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = (n + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-  }
-
-  setInterval(() => { showSlide(currentSlide + 1); }, 5000);
-
-  // FORM HANDLING
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    document.getElementById('formMessage').style.display = 'block';
-    e.target.reset();
+  function showSlides(n) {
+    if (n >= slides.length) {slideIndex = 0}
+    if (n < 0) {slideIndex = slides.length - 1}
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+    slides[slideIndex].classList.add("active");
   }
 </script>
 
