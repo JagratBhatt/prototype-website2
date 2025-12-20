@@ -24,51 +24,46 @@
       scroll-behavior: smooth;
       background-color: var(--light);
       overflow-x: hidden;
-      padding-bottom: 80px; /* Space for floating icons */
+      padding-bottom: 80px;
     }
 
-    a { text-decoration: none; color: inherit; cursor: pointer; }
-
-    /* ================= MOBILE SPLASH & AUDIO OVERLAY ================= */
-    #audio-gate {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: var(--dark); color: white; z-index: 10000;
-      display: none; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; cursor: pointer;
-    }
-
+    /* ================= MOBILE SPLASH SCREEN ================= */
     #splash-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: white; display: none; flex-direction: column;
-      justify-content: center; align-items: center; z-index: 9999;
-      transition: opacity 0.8s ease;
+      justify-content: center; align-items: center; z-index: 10000;
+      transition: opacity 1s ease;
     }
+    #splash-screen img { width: 180px; height: auto; margin-bottom: 20px; border-radius: 15px; }
+    #splash-screen p { font-size: 20px; font-weight: bold; color: var(--saffron); text-align: center; padding: 0 20px; }
 
-    #splash-screen img { width: 150px; height: auto; margin-bottom: 20px; border-radius: 10px; }
-    #splash-screen p { font-size: 18px; font-weight: bold; color: var(--saffron); text-align: center; padding: 0 20px; }
+    @media (max-width: 899px) { #splash-screen { display: flex; } }
 
-    @media (max-width: 899px) {
-      #audio-gate { display: flex; }
-    }
-
-    /* ================= HEADER & NAV ================= */
+    /* ================= NEW TRI-IMAGE HEADER ================= */
     header {
       background: var(--saffron); color: var(--light);
       position: sticky; top: 0; z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; }
-    .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .logo img { height: 50px; width: auto; border-radius: 4px; }
-    .logo-text { display: flex; flex-direction: column; }
-    .logo-text .hindi { font-size: 18px; font-weight: bold; white-space: nowrap; line-height: 1.1; }
-    .logo-text .english { font-size: 10px; opacity: 0.9; text-transform: uppercase; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      height: 100px;
+    }
 
-    .mobile-quick-nav { display: flex; background: white; border-bottom: 1px solid #ddd; }
-    .quick-link { flex: 1; text-align: center; padding: 12px; font-weight: bold; color: var(--saffron); font-size: 14px; text-transform: uppercase; border-right: 1px solid #eee; }
+    .header-side-img { height: 80px; width: auto; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-    .menu-toggle { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+    .center-logo-area {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .center-logo-area img { height: 55px; width: auto; border-radius: 5px; margin-bottom: 5px; }
+    .logo-text .hindi { font-size: 16px; font-weight: bold; line-height: 1; }
+    .logo-text .english { font-size: 9px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+
+    .menu-toggle { background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 10px; }
 
     nav { 
       display: none; position: absolute; top: 100%; left: 0; width: 100%;
@@ -76,99 +71,65 @@
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
     nav.active { display: flex; }
-    nav a { padding: 15px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    nav a { padding: 15px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); color: white; text-decoration: none; }
 
-    .page-view { display: none; }
-    .page-view.active { display: block; }
+    .mobile-quick-nav { display: flex; background: white; border-bottom: 1px solid #ddd; }
+    .quick-link { flex: 1; text-align: center; padding: 12px; font-weight: bold; color: var(--saffron); font-size: 14px; text-transform: uppercase; border-right: 1px solid #eee; cursor: pointer; }
 
-    /* ================= ABOUT VIEW ================= */
-    #about-view { position: relative; min-height: 80vh; padding: 20px; background-color: white; }
-    .back-btn-top { display: inline-flex; align-items: center; gap: 5px; color: var(--saffron); font-weight: bold; margin-bottom: 20px; position: relative; z-index: 2; }
-    .watermark-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 80%; background-image: url('https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.08; z-index: 0; pointer-events: none; }
-    .about-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-    .achievement-card { background: rgba(255, 255, 255, 0.8); padding: 20px; margin-bottom: 15px; border-left: 5px solid var(--saffron); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-    /* ================= NEO INDIVIDUAL FLOATING ICONS ================= */
-    .neo-social-container {
-      position: fixed;
-      bottom: 20px;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      z-index: 2000;
-      pointer-events: none; /* Allows scrolling through gaps */
-    }
-
-    .neo-icon {
-      pointer-events: auto; /* Re-enable for the icons themselves */
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      color: white;
-      font-size: 22px;
-      opacity: 0.75;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .neo-icon:hover, .neo-icon:active {
-      opacity: 1;
-      transform: translateY(-10px) scale(1.1);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .wa-neo { background: rgba(37, 211, 102, 0.85); }
-    .inst-neo { background: rgba(225, 48, 108, 0.85); }
-    .fb-neo { background: rgba(24, 119, 242, 0.85); }
-    .tw-neo { background: rgba(0, 0, 0, 0.75); }
-
-    /* ================= SLIDESHOW ================= */
-    .slideshow-container { position: relative; width: 100%; height: 60vh; overflow: hidden; background: #eee; }
-    .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s; }
+    /* ================= SLIDESHOW & TOUCH ================= */
+    .slideshow-container { position: relative; width: 100%; height: 65vh; overflow: hidden; background: #000; touch-action: pan-y; }
+    .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
     .slide img { width: 100%; height: 100%; object-fit: cover; }
     .slide.active { opacity: 1; }
-    .slide-text { position: absolute; bottom: 12%; left: 5%; color: #000; width: 85%; z-index: 5; }
-    .dot-container { position: absolute; bottom: 15px; width: 100%; text-align: center; z-index: 10; }
-    .dot { height: 8px; width: 8px; margin: 0 4px; background-color: rgba(0,0,0,0.3); border-radius: 50%; display: inline-block; }
-    .dot.active { background-color: var(--saffron); width: 20px; border-radius: 10px; }
+    .slide-text { position: absolute; bottom: 15%; left: 5%; color: white; width: 90%; z-index: 5; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+    .dot-container { position: absolute; bottom: 20px; width: 100%; text-align: center; z-index: 10; }
+    .dot { height: 10px; width: 10px; margin: 0 5px; background-color: rgba(255,255,255,0.5); border-radius: 50%; display: inline-block; cursor: pointer; }
+    .dot.active { background-color: var(--saffron); width: 25px; border-radius: 10px; }
 
-    .section-title { text-align: center; font-size: 24px; color: var(--saffron); padding: 30px 10px; font-weight: bold; }
-    .leader-row { display: flex; flex-direction: column; border-bottom: 4px solid var(--gray); }
-    .leader-image { width: 100%; height: 350px; }
-    .leader-image img { width: 100%; height: 100%; object-fit: cover; }
-    .leader-info { padding: 25px 20px; text-align: center; }
+    /* ================= NEO FLOATING SOCIALS ================= */
+    .neo-social-container {
+      position: fixed; bottom: 20px; left: 0; width: 100%;
+      display: flex; justify-content: center; gap: 15px; z-index: 2000; pointer-events: none;
+    }
+    .neo-icon {
+      pointer-events: auto; width: 50px; height: 50px; display: flex;
+      align-items: center; justify-content: center; border-radius: 50%;
+      color: white; font-size: 22px; opacity: 0.8; backdrop-filter: blur(5px);
+      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      text-decoration: none;
+    }
+    .wa-neo { background: #25d366; }
+    .inst-neo { background: #E1306C; }
+    .fb-neo { background: #1877F2; }
+    .tw-neo { background: #000; }
+
+    /* ================= VIEWS & CONTENT ================= */
+    .page-view { display: none; }
+    .page-view.active { display: block; }
+    .section-title { text-align: center; font-size: 26px; color: var(--saffron); padding: 40px 10px; font-weight: bold; }
     
-    .join-container { padding: 30px 15px; background: var(--gray); padding-bottom: 40px; }
-    form { background: white; padding: 25px; border-radius: 8px; }
-    input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 15px; background: var(--saffron); color: white; border: none; font-weight: bold; cursor: pointer; }
+    .leader-row { display: flex; flex-direction: column; border-bottom: 5px solid var(--gray); background: white; }
+    .leader-image { width: 100%; height: 400px; }
+    .leader-image img { width: 100%; height: 100%; object-fit: cover; }
+    .leader-info { padding: 30px 20px; text-align: center; }
+
+    #about-view { position: relative; padding: 40px 20px; min-height: 80vh; background: white; }
+    .watermark-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 80%; background: url('https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg') center/contain no-repeat; opacity: 0.08; pointer-events: none; }
+    .achievement-card { background: white; padding: 20px; margin-bottom: 20px; border-left: 6px solid var(--saffron); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 1; }
 
     @media (min-width: 900px) {
-      .mobile-quick-nav { display: none; }
-      nav { display: flex; position: static; flex-direction: row; width: auto; }
-      .leader-row { flex-direction: row; height: 50vh; }
+      .topbar { height: 120px; padding: 10px 10%; }
+      .header-side-img { height: 100px; }
+      .leader-row { flex-direction: row; }
       .leader-row:nth-child(even) { flex-direction: row-reverse; }
       .leader-image, .leader-info { flex: 1; }
-      .leader-info { text-align: left; padding: 60px; }
+      .leader-info { text-align: left; padding: 80px; display: flex; flex-direction: column; justify-content: center; }
     }
   </style>
 </head>
-<body>
+<body onload="handleSplash()">
 
-<audio id="shankh-audio" src="https://www.soundjay.com/nature/sounds/conch-shell-1.mp3" preload="auto"></audio>
-
-<div id="audio-gate" onclick="startMobileExperience()">
-  <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg" style="width:100px; border-radius:50%; margin-bottom:20px;">
-  <h3>भारत रक्षा पार्टी</h3>
-  <p style="margin-top:10px; opacity:0.8;">TAP TO ENTER</p>
-</div>
+<audio id="conch-sound" src="https://www.soundjay.com/nature/sounds/conch-shell-1.mp3" preload="auto"></audio>
 
 <div id="splash-screen">
   <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg" alt="Logo">
@@ -184,13 +145,18 @@
 
 <header>
   <div class="topbar">
-    <div class="logo" onclick="navigateTo('home-view')">
-      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg" alt="Logo">
+    <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/Netaji.jpg" class="header-side-img" alt="Netaji">
+    
+    <div class="center-logo-area" onclick="navigateTo('home-view')">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg" alt="Party Logo">
       <div class="logo-text">
         <div class="hindi">भारत रक्षा पार्टी</div>
         <div class="english">Bharat Raksha Party</div>
       </div>
     </div>
+
+    <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/Chanakya.jpg" class="header-side-img" alt="Chanakya">
+    
     <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     <nav id="mainNav">
       <a onclick="navigateTo('home-view'); toggleMenu();">Home</a>
@@ -199,69 +165,91 @@
     </nav>
   </div>
   <div class="mobile-quick-nav">
-    <a onclick="handleAboutClick()" class="quick-link">About</a>
-    <a href="#join" onclick="navigateTo('home-view')" class="quick-link" style="border-right:none;">Join Us</a>
+    <a onclick="navigateTo('about-view')" class="quick-link">About Us</a>
+    <a href="#join" onclick="navigateTo('home-view')" class="quick-link" style="border:none">Join Now</a>
   </div>
 </header>
 
 <div id="home-view" class="page-view active">
   <div class="slideshow-container" id="slideshow">
-    <div class="slide active"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg"><div class="slide-text"><h1> </h1></div></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/swamiVivekananda.jpg"><div class="slide-text"><h1>Swami Vivekananda</h1></div></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/BharatMata.webp"><div class="slide-text"><h1>Bharat Mata</h1></div></div>
+    <div class="slide active">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/logoFinal.jpg">
+      <div class="slide-text"><h1>Welcome to BRP</h1></div>
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/swamiVivekananda.jpg">
+      <div class="slide-text"><h1>Spiritual Awakening</h1><p>Swami Vivekananda's vision for Bharat.</p></div>
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/BharatMata.webp">
+      <div class="slide-text"><h1>Vande Mataram</h1><p>Dedicated to the Motherland.</p></div>
+    </div>
     <div class="dot-container"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
   </div>
 
   <section id="leaders">
     <h2 class="section-title">National Leadership</h2>
     <div class="leader-row">
-      <div class="leader-image"><img src="https://via.placeholder.com/600x400?text=Leader+1"></div>
-      <div class="leader-info"><h3>Shri Mahendra Puri Goswami</h3><p>National President.</p></div>
+      <div class="leader-image"><img src="https://via.placeholder.com/600x600?text=Mahendra+Puri+Goswami"></div>
+      <div class="leader-info">
+        <h3>Shri Mahendra Puri Goswami</h3>
+        <p>National President. A visionary dedicated to the spiritual and political awakening of Bharat.</p>
+      </div>
     </div>
     <div class="leader-row">
       <div class="leader-image"><img src="https://raw.githubusercontent.com/JagratBhatt/prototype-website2/main/ArunJi.PNG"></div>
-      <div class="leader-info"><h3>Shri Arun Agarwal</h3><p>National Spokesperson.</p></div>
+      <div class="leader-info">
+        <h3>Shri Arun Agarwal</h3>
+        <p>National Spokesperson of Bhaarat Raksha Party.</p>
+      </div>
     </div>
   </section>
 
-  <section id="join" class="join-container">
-    <h2 class="section-title">Join the Movement</h2>
-    <form onsubmit="event.preventDefault(); alert('Jai Hind!'); this.reset();">
-      <input type="text" placeholder="Full Name" required /><input type="text" placeholder="City" required /><input type="tel" placeholder="Phone Number" required /><button type="submit">REGISTER NOW</button>
+  <section id="join" style="padding: 60px 20px; background: var(--gray)">
+    <h2 class="section-title">Register With Us</h2>
+    <form style="max-width:500px; margin:auto; background:white; padding:30px; border-radius:10px;" onsubmit="event.preventDefault(); alert('Registration Successful!');">
+      <input type="text" placeholder="Full Name" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;" required>
+      <input type="tel" placeholder="Mobile Number" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;" required>
+      <button type="submit" style="width:100%; padding:15px; background:var(--saffron); color:white; border:none; font-weight:bold; cursor:pointer;">SUBMIT</button>
     </form>
   </section>
 </div>
 
 <div id="about-view" class="page-view">
   <div class="watermark-bg"></div>
-  <div class="about-content">
-    <a onclick="history.back()" class="back-btn-top"><i class="fas fa-arrow-left"></i> Back to Home</a>
-    <h2>Our Achievements</h2>
-    <div class="achievement-card"><h3>Awareness Campaigns</h3><p>500+ rallies organized nationwide.</p></div>
-    <div class="achievement-card"><h3>Youth Empowerment</h3><p>200+ local chapters established.</p></div>
+  <div style="max-width:800px; margin:auto; position:relative; z-index:2;">
+    <h2 class="section-title">Our Achievements</h2>
+    <div class="achievement-card"><h3>500+ Rallies</h3><p>Organized for national security and social unity.</p></div>
+    <div class="achievement-card"><h3>200+ Chapters</h3><p>Grassroots empowerment across all major states.</p></div>
+    <div class="achievement-card"><h3>Cultural Revival</h3><p>Protecting the ancient heritage of our nation.</p></div>
+    <button onclick="navigateTo('home-view')" style="padding:15px 30px; background:var(--saffron); color:white; border:none; cursor:pointer; display:block; margin:auto;">BACK TO HOME</button>
   </div>
 </div>
 
-<footer style="background:var(--dark); color:white; text-align:center; padding:30px 20px;"><p>© 2025 Bharat Raksha Party</p></footer>
+<footer style="background:var(--dark); color:white; text-align:center; padding:40px 20px;">
+  <p>© 2025 Bharat Raksha Party | All Rights Reserved</p>
+</footer>
 
 <script>
-  function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
-
-  function startMobileExperience() {
-    const gate = document.getElementById('audio-gate');
+  // SPLASH & AUDIO LOGIC
+  function handleSplash() {
     const splash = document.getElementById('splash-screen');
-    const audio = document.getElementById('shankh-audio');
-    gate.style.display = 'none';
-    splash.style.display = 'flex';
-    audio.play().catch(e => console.log("Audio play failed", e));
-    setTimeout(() => {
-      splash.style.opacity = '0';
-      setTimeout(() => { splash.style.display = 'none'; }, 800);
-    }, 1200);
+    const audio = document.getElementById('conch-sound');
+
+    // Attempt audio on first interaction if splash is visible
+    window.addEventListener('click', () => {
+      if(audio.paused) audio.play();
+    }, {once: true});
+
+    if (window.innerWidth < 900) {
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        setTimeout(() => splash.style.display = 'none', 1000);
+      }, 1500); // Show for 1.5 seconds
+    }
   }
 
-  function handleAboutClick() { history.pushState({page: 'about'}, "About", "#about"); navigateTo('about-view'); }
-  window.onpopstate = function() { navigateTo('home-view'); };
+  function toggleMenu() { document.getElementById('mainNav').classList.toggle('active'); }
 
   function navigateTo(viewId) {
     document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
@@ -269,15 +257,33 @@
     window.scrollTo(0, 0);
   }
 
+  // SLIDESHOW TOUCH & AUTO
   let slideIndex = 0;
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.dot');
+  const slideshow = document.getElementById('slideshow');
+
   function showSlides(n) {
-    if (n >= slides.length) slideIndex = 0; else if (n < 0) slideIndex = slides.length - 1; else slideIndex = n;
-    slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.forEach(d => d.classList.remove('active')));
-    slides[slideIndex].classList.add('active'); dots[slideIndex].classList.add('active');
+    if (n >= slides.length) slideIndex = 0;
+    else if (n < 0) slideIndex = slides.length - 1;
+    else slideIndex = n;
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[slideIndex].classList.add('active');
+    dots[slideIndex].classList.add('active');
   }
-  setInterval(() => { if(document.getElementById('home-view').classList.contains('active')) showSlides(slideIndex + 1); }, 5000);
+
+  let startX = 0;
+  slideshow.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  slideshow.addEventListener('touchend', e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) showSlides(slideIndex + 1); // Swipe Left
+    if (endX - startX > 50) showSlides(slideIndex - 1); // Swipe Right
+  });
+
+  setInterval(() => {
+    if(document.getElementById('home-view').classList.contains('active')) showSlides(slideIndex + 1);
+  }, 5000);
 </script>
 
 </body>
